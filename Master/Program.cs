@@ -10,10 +10,10 @@ namespace Master
         {
             string assemPath = Assembly.GetExecutingAssembly().Location;
             int idx = assemPath.IndexOf("DynamicAssemblyTest");
-            assemPath = Path.Combine(assemPath.Substring(idx), "ToLoad\\bin\\Debug\\ToLoad.exe");
+            assemPath = Path.Combine(assemPath.Substring(0, idx + 19), "ToLoad\\bin\\Debug\\ToLoad.exe");
 
             // Assembly loadedAssembly = Assembly.LoadFile(@"........\DynamicAssemblyTest\ToLoad\bin\Debug\ToLoad.exe");
-            byte[] assemblyAsBytes = File.ReadAllBytes(@"C:\Users\tekhe\Documents\visual studio 2015\Projects\DynamicAssemblyTest\ToLoad\bin\Debug\ToLoad.exe");
+            byte[] assemblyAsBytes = File.ReadAllBytes(assemPath);
             Assembly loadedAssembly = AppDomain.CurrentDomain.Load(assemblyAsBytes);
             MethodInfo mi = loadedAssembly.EntryPoint;
 
